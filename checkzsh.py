@@ -13,6 +13,8 @@ if p1.returncode == value :
     print ("ZSH is not installed. Installing ZSH next and making default SHELL:")
     install_zsh = 'sudo apt update && sudo apt install zsh -y && chsh -s $(which zsh)'
     os.system(install_zsh)
+    print("ZSH is installed and is the default SHELL. Please exit ssh or your login and restart the script")
+    exit()
 else:
     print ("ZSH is installed, will pass on this step")
 
@@ -32,7 +34,10 @@ with open(file_path_zshrc, 'r') as file:
         print('Oh-my-zsh is not installed proceeding to installation:')
         install_ohmyzsh = 'sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"'
         os.system(install_ohmyzsh)
+        print('Please press "exit" so the script continues to next step')
 
+#Check if plugins are installed if not installing it
+        
 word_ohmyzsh_plugin = "plugins=(git)"
 word_ohmyzsh_new_plugin = "plugins=(git zsh-syntax-highlighting zsh-autosuggestions)"
 
