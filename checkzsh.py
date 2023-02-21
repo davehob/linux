@@ -57,3 +57,23 @@ with open(file_path_zshrc, 'r+') as file:
     else:
         print('The plugins are installed, passing this step')
         file.close()
+
+#Check if Powerlevel10k is installed        
+        
+word_ohmyzsh_theme = 'ZSH_THEME="robbyrussell"'
+word_ohmyzsh_new_theme = 'ZSH_THEME="powerlevel10k/powerlevel10k"'
+
+with open(file_path_zshrc, 'r+') as file:
+    # read all content of a file
+    content = file.read()
+    # check if string present in a file
+    if word_ohmyzsh_theme in content:
+        print('Installing the new powerlevel10k ')
+        content = content.replace(word_ohmyzsh_theme, word_ohmyzsh_new_theme)
+        install_omz_theme = 'git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k'
+        os.system(install_omz_theme)
+        file.write(content)
+        file.close()
+    else:
+        print('Powerlevel10k is installed moving to next step')
+        file.close()
