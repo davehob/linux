@@ -11,12 +11,12 @@ value = 127
 
 if p1.returncode == value :
     print ("ZSH is not installed. Installing ZSH next and making default SHELL:")
-    install_zsh = 'sudo apt update && sudo apt install zsh && chsh -s $(which zsh)'
+    install_zsh = 'sudo apt update && sudo apt install zsh -y && chsh -s $(which zsh)'
     os.system(install_zsh)
 else:
     print ("ZSH is installed, will pass on this step")
 
-#Checking if Oh-My-Zsh is installed adn if not installting it
+#Checking if Oh-My-Zsh is installed and if not installing it
 
 file_path_zshrc = os.path.expanduser('~/.zshrc')
 word_ohmyzsh = "export ZSH"
