@@ -37,11 +37,11 @@ with open(file_path_zshrc, 'r') as file:
         print('Please press "exit" so the script continues to next step')
 
 #Check if plugins are installed if not installing it
-        
+
 word_ohmyzsh_plugin = "plugins=(git)"
 word_ohmyzsh_new_plugin = "plugins=(git zsh-syntax-highlighting zsh-autosuggestions)"
 
-with open(file_path_zshrc, 'r+') as file:
+with open(file_path_zshrc, 'r') as file:
     # read all content of a file
     content = file.read()
     # check if string present in a file
@@ -52,18 +52,19 @@ with open(file_path_zshrc, 'r+') as file:
         os.system(install_omz_highlighting)
         install_omz_autosuggestions = 'git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions'
         os.system(install_omz_autosuggestions)
-        file.write(content)
-        file.close()
+        with open(file_path_zshrc, 'w') as file:
+            file.write(content)
+            file.close()
     else:
         print('The plugins are installed, passing this step')
         file.close()
 
-#Check if Powerlevel10k is installed        
+#Check if Powerlevel10k is installed
         
 word_ohmyzsh_theme = 'ZSH_THEME="robbyrussell"'
 word_ohmyzsh_new_theme = 'ZSH_THEME="powerlevel10k/powerlevel10k"'
 
-with open(file_path_zshrc, 'r+') as file:
+with open(file_path_zshrc, 'r') as file:
     # read all content of a file
     content = file.read()
     # check if string present in a file
@@ -72,8 +73,9 @@ with open(file_path_zshrc, 'r+') as file:
         content = content.replace(word_ohmyzsh_theme, word_ohmyzsh_new_theme)
         install_omz_theme = 'git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k'
         os.system(install_omz_theme)
-        file.write(content)
-        file.close()
+        with open(file_path_zshrc, 'w') as file:
+            file.write(content)
+            file.close()
     else:
         print('Powerlevel10k is installed moving to next step')
         file.close()
