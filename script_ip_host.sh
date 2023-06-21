@@ -1,5 +1,11 @@
 echo "What ip would you like to set for this host?:"
 read ipinput
+echo "What class is the network"
+read subnetclass
+echo "What gateway do you want"
+read gateway
+echo "What dns server you want"
+read dnsserver
 
 sudo cat > /etc/netplan/00-installer-config.yaml << EOF
 # This is the network config written by 'subiquity'
@@ -7,15 +13,14 @@ network:
   ethernets:
     ens3:
       addresses:
-      - $ipinput/24
+      - $ipinput/$subnetclass
       routes:
         - to: default
-          via: 192.168.1.1
+          via: $gateway
       nameservers:
         addresses:
-        - 8.8.8.8
-        - 8.8.4.4
-        - 192.168.1.1
+        - $dnsserver
+        - 1.1.1.1
         search: []
   version: 2
 EOF
