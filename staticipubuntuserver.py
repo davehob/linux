@@ -2,7 +2,7 @@ import os
 import subprocess
 
 def set_static_ip(interface):
-  print("Setting static IP address...")
+  print("Setting static IP address followed by the class you want to use. Ex: 10.11.10.1/16")
   ip_address = input("Enter IP address: ")
   gateway = input("Enter gateway IP address: ")
   dns = input("Enter DNS IP address: ")
@@ -14,7 +14,7 @@ def set_static_ip(interface):
     file.write('  ethernets:\n')
     file.write(f'    {interface}:\n')
     file.write(f'      addresses:\n')
-    file.write(f'        - {ip_address}/24\n')
+    file.write(f'        - {ip_address}\n')
     file.write(f'      nameservers:\n')
     file.write(f'        addresses: [{dns}]\n')
     file.write(f'      routes:\n')
